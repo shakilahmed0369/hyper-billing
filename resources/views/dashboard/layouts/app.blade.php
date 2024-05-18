@@ -76,7 +76,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css"
         integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="{{ asset('assets/js/plugins/jquery.selectric.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/jquery.selectric.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/plugins/jquery.uploadPreview.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-timepicker.min.js') }}"></script>
@@ -93,35 +93,7 @@
     <!-- Page Specific JS File -->
     {{-- <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script> --}}
     <script>
-            document.addEventListener('htmx:configRequest', function(evt) {
-            console.log('HTMX request configured:', evt.detail);
-        });
-
-        document.addEventListener('htmx:beforeRequest', function(evt) {
-            console.log('HTMX before request:', evt.detail);
-        });
-
-        document.addEventListener('htmx:afterRequest', function(evt) {
-            console.log('HTMX after request:', evt.detail);
-        });
-
-        document.addEventListener('htmx:beforeOnLoad', function(evt) {
-            console.log('HTMX before onload:', evt.detail);
-        });
-
-        document.addEventListener('htmx:afterOnLoad', function(evt) {
-            console.log('HTMX after onload:', evt.detail);
-        });
-        document.addEventListener('htmx:afterOnLoad', function(evt) {
-            console.log('HTMX after onload:', evt.detail);
-
-            var xhr = evt.detail.xhr;
-            var redirectUrl = xhr.getResponseHeader("HX-Redirect");
-            if (redirectUrl) {
-                console.log("Redirecting to:", redirectUrl);
-                window.location.href = redirectUrl;
-            }
-        });
+ 
     </script>
 </body>
 

@@ -43,7 +43,7 @@
           <li class="menu-header">Starter</li>
 
           <li><a class="nav-link" href="{{ route('shops.index') }}"><i class="far fa-square"></i> <span>Shops</span></a></li>
-          <li><a class="nav-link" href="{{ route('shops.index') }}"><i class="far fa-square"></i> <span>Shop Bilings</span></a></li>
+          <li><a class="nav-link" href="{{ route('shop-billings.index') }}"><i class="far fa-square"></i> <span>Shop Bilings</span></a></li>
 
         </ul>
     </aside>

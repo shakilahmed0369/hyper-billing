@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('shop_billings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id');
+            $table->double('shop_rent')->nullable();
+            $table->double('per_unit_cost')->nullable();
+            $table->double('previous_unit')->nullable();
+            $table->double('current_unit')->nullable();
+            $table->double('total_used_unit')->nullable();
+            $table->double('other_cost')->nullable();
+            $table->double('total_cost')->nullable();
+            $table->timestamp('entry_date')->nullable();
             $table->timestamps();
         });
     }

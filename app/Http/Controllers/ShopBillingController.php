@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
+use App\Models\ShopBilling;
 use Illuminate\Http\Request;
 
 class ShopBillingController extends Controller
@@ -11,7 +13,7 @@ class ShopBillingController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.shop-billing.index');
     }
 
     /**
@@ -19,7 +21,33 @@ class ShopBillingController extends Controller
      */
     public function create()
     {
-        //
+        $shops = Shop::all();
+        return view('dashboard.shop-billing.create', compact('shops'));
+    }
+
+    function calculate(Request $request) {
+        $request->validate([
+            'shop' => ['required', 'exists:shops,id'],
+            'current_unit' => ['required', 'numeric'],
+            'date' => ['required']
+        ]);
+        $entryDate = $request->date;
+        $shop = Shop::find($request->shop);
+        $lastMonthEntry = ShopBilling::where('shop_id', $request->shop)->orderBy('id', 'desc')->first();
+        $usedUnits = $request->current_unit - ($lastMonthEntry ? $lastMonthEntry->current_unit : $request->current_unit);
+        $unitCalculation = [
+            'per_unit_cost' => $shop->per_unit_cost,
+            'current_unit' => $request->current_unit,
+            'previous_unit' => $lastMonthEntry ? $lastMonthEntry->current_unit : 0,
+            'total_used_unit' => $usedUnits,
+            'total_charge' => ($usedUnits * $shop->per_unit_cost),
+        ];
+
+        $payableAmount = $shop->shop_rent + $unitCalculation['total_charge'];
+        
+       return view('dashboard.shop-billing.components.calculation-table', compact('shop', 'unitCalculation', 'payableAmount', 'entryDate'))->withHeaders([
+            'HX-Target' => '#calculation-card',
+        ]);
     }
 
     /**
@@ -27,7 +55,9 @@ class ShopBillingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ShopBilling::create($request->all());
+
+        return response()->json([], 200, ['HX-Location' => route('shop-billings.index')]);
     }
 
     /**
