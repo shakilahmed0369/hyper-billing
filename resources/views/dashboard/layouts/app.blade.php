@@ -27,7 +27,6 @@
 
 <body>
   <x-htmx-error-handler />
-
   <div id="app">
       <div class="progress" style="height: 3px; background-color: white;">
           <div class="indeterminate" style="background-color: red;"></div>
@@ -93,7 +92,7 @@
     <!-- Page Specific JS File -->
     {{-- <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script> --}}
     <script>
- 
+
     </script>
 </body>
 

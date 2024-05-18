@@ -1,3 +1,4 @@
+<x-session-alert />
 <div class="card">
     <div class="card-header">
         <h6>Unit Calculation</h6>
@@ -68,7 +69,9 @@
             <input type="hidden" name="total_cost" value="{{ $payableAmount }}">
             <input type="hidden" name="entry_date" value="{{ $entryDate }}">
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <div class="my-5 text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
         </form>
     </div>
 </div>

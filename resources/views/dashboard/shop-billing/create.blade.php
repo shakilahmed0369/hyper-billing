@@ -10,6 +10,9 @@
                 <a hx-get="{{ route('shops.index') }}" hx-target="#app" hx-push-url="true"
                     class="btn btn-primary mb-3 text-white">Go back</a>
             </div>
+
+            <x-session-alert />
+
             <div class="card">
                 <div class="card-body">
                     <form hx-post="{{ route('shop-billings.calculate') }}" hx-target="#app" hx-swap="innerHTML">
@@ -59,7 +62,7 @@
             </div>
 
             <div id="calculation-card"></div>
-        
+
         </div>
     </section>
 @endsection
