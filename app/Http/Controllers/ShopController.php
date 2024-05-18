@@ -30,15 +30,15 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-       $validatedData = $request->validate([
-        'name' => ['required'],
-        'shop_rent' => ['required', 'integer'],
-        'per_unit_cost' => ['required', 'integer'],
-       ]) ;
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'shop_rent' => ['required', 'integer'],
+            'per_unit_cost' => ['required', 'integer'],
+        ]);
 
-       Shop::create($validatedData);
+        Shop::create($validatedData);
 
-    return response()->json([], 200, ['HX-Location' => route('shops.index')]);
+        return response()->json([], 200, ['HX-Location' => route('shops.index')]);
     }
 
     /**
@@ -54,7 +54,8 @@ class ShopController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+        return view('dashboard.shop.edit', compact('shop'));
     }
 
     /**
@@ -62,7 +63,17 @@ class ShopController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'shop_rent' => ['required', 'integer'],
+            'per_unit_cost' => ['required', 'integer'],
+        ]);
+
+        $shop = Shop::findOrFail($id);
+
+        $shop->update($validatedData);
+
+        return response()->json([], 200, ['HX-Location' => route('shops.index')]);
     }
 
     /**
@@ -70,6 +81,9 @@ class ShopController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+        $shop->delete();
+
+        return response()->json([], 200, ['HX-Location' => route('shops.index')]);
     }
 }
