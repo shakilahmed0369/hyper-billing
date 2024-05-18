@@ -15,34 +15,34 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Rent</th>
-                        <th scope="col">Per Unit Cost</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Shop</th>
+                        <th scope="col">Total Bill</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($shops as $shop)
+                    @foreach ($billings as $bill)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $shop->name }}</td>
-                        <td>{{ $shop->shop_rent }}</td>
-                        <td>{{ $shop->per_unit_cost }}</td>
+                        <td>{{ date('d-F-Y', strtotime($bill->entry_date)) }}</td>
+                        <td>{{ $bill->shop->name}}</td>
+                        <td>{{ $bill->total_cost }}</td>
                         <td class="d-flex">
-                            <div>
+                            {{-- <div>
                                 <button hx-get="{{ route('shops.edit', $shop->id) }}" hx-target="#app" class="btn btn-sm btn-primary mr-2">Edit</button>
-                            </div>
-                            <form action="{{ route('shops.destroy', $shop->id) }}" hx-confirm="Are you sure?" method="POST">
+                            </div> --}}
+                            <form action="{{ route('shop-billings.destroy', $bill->id) }}" hx-confirm="Are you sure?" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" >Delete</button>
                             </form>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
 
                 </tbody>
             </table>
-
+            {{ $billings->links() }}
         </div>
     </section>
 @endsection

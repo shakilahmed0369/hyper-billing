@@ -14,8 +14,9 @@ class ShopBillingController extends Controller
      */
     public function index()
     {
+        $billings = ShopBilling::with('shop')->orderBy('id', 'desc')->paginate(20);
 
-        return view('dashboard.shop-billing.index');
+        return view('dashboard.shop-billing.index', compact('billings'));
     }
 
     /**
@@ -107,6 +108,10 @@ class ShopBillingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $billing = ShopBilling::find($id);
+        $billing->delete();
+
+        return response()->json([], 200, ['HX-Location' => route('shop-billings.index')]);
+
     }
 }

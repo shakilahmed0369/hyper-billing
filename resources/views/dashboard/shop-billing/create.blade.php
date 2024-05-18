@@ -22,7 +22,7 @@
                                 <div class="form-group">
                                     <label>Date</label>
                                     <input type="date" name="date" class="form-control @error('date') is-invalid @enderror"
-                                        value="{{ old('date') }}">
+                                        value="{{ date('Y-m-d') }}">
                                     @error('date')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
